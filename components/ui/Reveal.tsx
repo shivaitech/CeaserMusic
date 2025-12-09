@@ -1,36 +1,36 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { ScrollRevealProps } from '../../types';
 
-interface RevealProps {
-  children: React.ReactNode;
-  width?: "fit-content" | "100%";
-  delay?: number;
-}
-
-export const Reveal: React.FC<RevealProps> = ({ children, width = "fit-content", delay = 0.25 }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const mainControls = useAnimation();
+export const Reveal: React.FC<ScrollRevealProps> = ({ children, className = "", delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isInView) {
-      mainControls.start("visible");
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-  }, [isInView, mainControls]);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div ref={ref} style={{ position: "relative", width, overflow: "hidden" }}>
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, y: 75 },
-          visible: { opacity: 1, y: 0 },
-        }}
-        initial="hidden"
-        animate={mainControls}
-        transition={{ duration: 0.5, delay: delay }}
+    <div ref={ref} className={`overflow-hidden ${className}`}>
+      <div
+        className={`reveal-text ${isVisible ? 'visible' : ''}`}
+        style={{ transitionDelay: `${delay}ms` }}
       >
         {children}
-      </motion.div>
+      </div>
     </div>
   );
 };

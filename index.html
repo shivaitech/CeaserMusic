@@ -1,74 +1,108 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="bg-[#Fdfdfd] text-black antialiased">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>[ AZ : UR ] Media & Intelligence Atelier</title>
+    <title>AZ:UR | AI Powered Membership</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
-              display: ['Oswald', 'sans-serif'],
-              mono: ['JetBrains Mono', 'monospace'],
+              condensed: ['Anton', 'sans-serif'],
             },
             colors: {
-              brand: {
-                black: '#000000',
-                white: '#FFFFFF',
-                gray: '#F5F5F5',
-              }
+              black: '#000000',
+              white: '#ffffff',
+              offwhite: '#Fdfdfd',
+              gray: {
+                50: '#f9fafb',
+                100: '#f3f4f6',
+                200: '#e5e7eb',
+                300: '#d1d5db',
+                400: '#9ca3af',
+                500: '#6b7280',
+                800: '#1f2937',
+                900: '#111827',
+              },
+              neon: '#0099FF', // Vibrant Azure Blue
+            },
+            backgroundImage: {
+               'holo': 'linear-gradient(135deg, #FF9DCD 0%, #AEC8FF 30%, #E3FF76 60%, #FF9DCD 100%)',
+               'mesh': 'radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(340,100%,76%,1) 0px, transparent 50%)',
             },
             animation: {
-              'marquee': 'marquee 15s linear infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'shimmer': 'shimmer 3s linear infinite',
+              'sticker-float': 'sticker-float 4s ease-in-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'fade-in-up': 'fadeInUp 1s ease-out forwards',
             },
             keyframes: {
-              marquee: {
-                '0%': { transform: 'translateX(0%)' },
-                '100%': { transform: 'translateX(-100%)' },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              shimmer: {
+                '0%': { backgroundPosition: '200% center' },
+                '100%': { backgroundPosition: '-200% center' },
+              },
+              'sticker-float': {
+                '0%, 100%': { transform: 'rotate(12deg) translateY(0)' },
+                '50%': { transform: 'rotate(10deg) translateY(-5px)' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
               }
             }
-          }
-        }
+          },
+        },
       }
     </script>
     <style>
       body {
-        background-color: #FFFFFF;
-        color: #000000;
-        overflow-x: hidden;
-      }
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #fff;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #000;
+        cursor: default;
+        background-color: #Fdfdfd;
       }
       
-      ::selection {
-        background: #000;
-        color: #fff;
+      /* Hide scrollbar for aesthetics */
+      ::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      .text-stroke-black {
+        -webkit-text-stroke: 2px black;
+        color: transparent;
+      }
+
+      .clip-text {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .sticker-shadow {
+        filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.15));
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
       }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.0/client",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/"
   }
 }
 </script>
